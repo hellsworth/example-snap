@@ -9,10 +9,10 @@ grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: devmode # use 'strict' once you have the right plugs and slots
 
 plugs:
-  gnome-3-32-1804:
-    interface: content
-    target: gnome-platform
-    default-provider: gnome-3-32-1804:gnome-3-32-1804
+#  gnome-3-28-1804:
+#    interface: content
+#    target: gnome-platform
+#    default-provider: gnome-3-28-1804:gnome-3-28-1804
   gtk-3-themes:
     interface: content
     target: $SNAP/share/themes
@@ -26,14 +26,14 @@ plugs:
     target: $SNAP/share/sounds
     default-provider: gtk-common-themes:sounds-themes
 
-environment:
-    XDG_DATA_DIRS: $SNAP/share:$XDG_DATA_DIRS
+#environment:
+#    XDG_DATA_DIRS: $SNAP/share:$XDG_DATA_DIRS
 
-slots:
-  gtk-app-dbus-svc:
-    interface: dbus
-    bus: session
-    name: org.gtk.Demo2
+#slots:
+#  gtk-app-dbus-svc:
+#    interface: dbus
+#    bus: session
+#    name: org.gtk.Demo2
 
 apps:
   gtk-desktop-example:
@@ -59,9 +59,9 @@ parts:
       sudo apt install -y python-setuptools
       sudo -H pip3 install -I meson==0.50.0
       snapcraftctl build
-      mkdir -p $SNAPCRAFT_PART_INSTALL/share/themes
-      mkdir -p $SNAPCRAFT_PART_INSTALL/share/icons
-      mkdir -p $SNAPCRAFT_PART_INSTALL/share/sounds
+#      mkdir -p $SNAPCRAFT_PART_INSTALL/share/themes
+#      mkdir -p $SNAPCRAFT_PART_INSTALL/share/icons
+#      mkdir -p $SNAPCRAFT_PART_INSTALL/share/sounds
     stage-packages:
       - libblkid1
       - libgcc1
@@ -78,12 +78,13 @@ parts:
       - libgtk2.0-0
       - liblz4-1
       - libstdc++6
-    prime:
-      - usr
-      - share/icons
-      - share/themes
+#    stage:
+#      - usr
+#      - share/icons
+#      - share/themes
     build-packages:
       - appstream-util
+
 # critical for desktop-launch command to be available: https://forum.snapcraft.io/t/snapcraft-3-core18-and-desktop-apps/9520/2
   desktop-gtk3:
     build-packages:
