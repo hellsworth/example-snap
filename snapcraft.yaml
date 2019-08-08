@@ -29,12 +29,6 @@ plugs:
 environment:
     XDG_DATA_DIRS: $SNAP/share:$XDG_DATA_DIRS
 
-#slots:
-#  gtk-app-dbus-svc:
-#    interface: dbus
-#    bus: session
-#    name: org.gtk.Demo2
-
 apps:
   gtk-desktop-example:
     desktop: usr/share/applications/com.github.kenvandine.gtk-desktop-example.desktop 
@@ -58,15 +52,10 @@ parts:
     plugin: meson
     source: .
     meson-parameters: [--prefix=/usr]
-#    build-attributes:
-#      - no-system-libraries
     override-build: |
       sudo apt install -y python-setuptools
       sudo -H pip3 install -I meson==0.50.0
       snapcraftctl build
-#      mkdir -p $SNAPCRAFT_PART_INSTALL/share/themes
-#      mkdir -p $SNAPCRAFT_PART_INSTALL/share/icons
-#      mkdir -p $SNAPCRAFT_PART_INSTALL/share/sounds
     stage-packages:
       - libblkid1
       - libgcc1
@@ -83,10 +72,6 @@ parts:
       - libgtk2.0-0
       - liblz4-1
       - libstdc++6
-#    stage:
-#      - usr
-#      - share/icons
-#      - share/themes
     prime:
       - usr/share/gtk-desktop-example 
       - usr/share/applications
