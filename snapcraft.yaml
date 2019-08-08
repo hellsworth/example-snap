@@ -26,9 +26,6 @@ plugs:
     target: $SNAP/share/sounds
     default-provider: gtk-common-themes
 
-    #environment:
-    #XDG_DATA_DIRS: $SNAP/share:$XDG_DATA_DIRS
-
 apps:
   gtk-desktop-example:
     desktop: usr/share/applications/com.github.kenvandine.gtk-desktop-example.desktop 
@@ -43,11 +40,23 @@ apps:
     environment:
       XDG_DATA_DIRS: $SNAP/share:$XDG_DATA_DIRS
       GSETTINGS_SCHEMA_DIR: $SNAP/usr/share/glib-2.0/schemas
-      #      LD_LIBRARY_PATH: $SNAP/usr/lib/gtk-desktop-example:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gtk-desktop-example:$LD_LIBRARY_PATH
-      #GI_TYPELIB_PATH: $SNAP/usr/lib/gtk-desktop-example/girepository-1.0:$SNAP/usr/lib/girepository-1.0:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/girepository-1.0:$SNAP/gnome-platform/usr/lib/girepository-1.0:$SNAP/gnome-platform/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/girepository-1.0
       PYTHONPATH: $SNAP/usr/lib/python3/dist-packages:$SNAP/gnome-platform/usr/lib/python3/dist-packages:$SNAP/usr/share/gtk-desktop-example
 
 parts:
+  desktop-gnome-platform:
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: gtk
+    plugin: make
+    make-parameters: ["FLAVOR=gtk3"]
+    stage-packages:
+      - lshw
+    build-packages:
+      - build-essential
+      - libgtk-3-dev
+    override-build: |
+      snapcraftctl build
+      mkdir -pv $SNAPCRAFT_PART_INSTALL/gnome-platform
+
   gtk-desktop-example:
     after: [desktop-gnome-platform]
     plugin: meson
@@ -81,17 +90,3 @@ parts:
     build-packages:
       - appstream-util
       - libgirepository1.0-dev
-
-  desktop-gnome-platform:
-    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
-    source-subdir: gtk
-    plugin: make
-    make-parameters: ["FLAVOR=gtk3"]
-    stage-packages:
-      - lshw
-    build-packages:
-      - build-essential
-      - libgtk-3-dev
-    override-build: |
-      snapcraftctl build
-      mkdir -pv $SNAPCRAFT_PART_INSTALL/gnome-platform
