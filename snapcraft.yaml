@@ -88,9 +88,10 @@ parts:
 #      - share/icons
 #      - share/themes
     prime:
-      - usr/share/gtk-desktop-example/ 
-      - usr/share/applications/
+      - usr/share/gtk-desktop-example 
+      - usr/share/applications
       - usr/bin/gtk-desktop-example
+      - usr/share/glib-2.0/schemas
     build-packages:
       - appstream-util
       - libgirepository1.0-dev
