@@ -95,13 +95,14 @@ parts:
     build-packages:
       - appstream-util
       - libgirepository1.0-dev
-#      - gtk-desktop-example
 
   desktop-gnome-platform:
     source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-subdir: gtk
     plugin: make
     make-parameters: ["FLAVOR=gtk3"]
+    stage-packages:
+      - lshw
     build-packages:
       - build-essential
       - libgtk-3-dev
