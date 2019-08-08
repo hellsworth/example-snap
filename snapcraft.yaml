@@ -26,6 +26,9 @@ plugs:
     target: $SNAP/share/sounds
     default-provider: gtk-common-themes
 
+    #environment:
+    #XDG_DATA_DIRS: $SNAP/share:$XDG_DATA_DIRS
+
 apps:
   gtk-desktop-example:
     desktop: usr/share/applications/com.github.kenvandine.gtk-desktop-example.desktop 
@@ -40,8 +43,8 @@ apps:
     environment:
       XDG_DATA_DIRS: $SNAP/share:$XDG_DATA_DIRS
       GSETTINGS_SCHEMA_DIR: $SNAP/usr/share/glib-2.0/schemas
-      LD_LIBRARY_PATH: $SNAP/usr/lib/gtk-desktop-example:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gtk-desktop-example:$LD_LIBRARY_PATH
-      GI_TYPELIB_PATH: $SNAP/usr/lib/gtk-desktop-example/girepository-1.0:$SNAP/usr/lib/girepository-1.0:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/girepository-1.0:$SNAP/gnome-platform/usr/lib/girepository-1.0:$SNAP/gnome-platform/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/girepository-1.0
+      #      LD_LIBRARY_PATH: $SNAP/usr/lib/gtk-desktop-example:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gtk-desktop-example:$LD_LIBRARY_PATH
+      #GI_TYPELIB_PATH: $SNAP/usr/lib/gtk-desktop-example/girepository-1.0:$SNAP/usr/lib/girepository-1.0:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/girepository-1.0:$SNAP/gnome-platform/usr/lib/girepository-1.0:$SNAP/gnome-platform/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/girepository-1.0
       PYTHONPATH: $SNAP/usr/lib/python3/dist-packages:$SNAP/gnome-platform/usr/lib/python3/dist-packages:$SNAP/usr/share/gtk-desktop-example
 
 parts:
